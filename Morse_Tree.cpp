@@ -1,5 +1,6 @@
 #include "Morse_Tree.h"
 #include <fstream>
+#include <iostream>
 
 string Morse_Tree::trim(const string& the_string)
 { /* trim: trims off excess characters from a string
@@ -20,6 +21,11 @@ void Morse_Tree::readFile() {
 	 */
 
 	ifstream in("morse.txt");
+	if (!in) {
+		cout << "Error, check morse.txt file location" << endl;
+		system("pause");
+		exit(1);
+	}
 	string line, letter, code;
 	if (in) {
 		while (getline(in, line)) { // Get the line from the file, store it in a variable called line
