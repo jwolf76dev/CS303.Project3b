@@ -7,15 +7,18 @@ using namespace std;
 
 class Morse_Tree {
 private:
-	BTNode<string> *root; // A pointer to the root of our tree
+	BTNode<string> *root = new BTNode<string>("ROOT");; // A pointer to the root of our tree
 
 public:
-	Morse_Tree() { buildTree(); } // Build the tree when object is created
+	Morse_Tree() {
+		readFile();
+	} // Build the tree when object is created
 
 
 	// Tree Building Functions
 	string trim(const string&);
-	void buildTree();
+	void readFile();
+	void buildTree(string, string);
 
 	// Encoding/Decoding Functions
 	string encode(string); // Return morse code for a letter
