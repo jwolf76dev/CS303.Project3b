@@ -11,8 +11,8 @@ public:
 	MorseCode() {}
 	~MorseCode() {}
 
-	string decode(string);
-	string encode(string);
+	string decode(const string&);
+	string encode(const string&);
 
 
 };

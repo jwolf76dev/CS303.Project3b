@@ -38,7 +38,7 @@ void Morse_Tree::readFile() {
 	}
 }
 
-void Morse_Tree::buildTree(string letter, string code) {
+void Morse_Tree::buildTree(const string& letter, const string& code) {
 	/* buildTree: Build the tree one node at a time
 	 * @param: the data for the node
 	 * @param: the morse code for the node
@@ -63,7 +63,7 @@ void Morse_Tree::buildTree(string letter, string code) {
 
 }
 
-void Morse_Tree::buildMap(string letter, string code){
+void Morse_Tree::buildMap(const string& letter, const string& code){
 	/* buildMap: Build the map for encoding
 	* @param: the key
 	* @param: the morse code which corresponds that key
@@ -72,7 +72,7 @@ void Morse_Tree::buildMap(string letter, string code){
 	encodingMap[letter] = code; // add the entry to the encoding map
 }
 
-const string Morse_Tree::encode(string enc){
+const string Morse_Tree::encode(const string& enc){
 	/*encode: turns a character into morse code
 	 * @param: the character to encode
 	 * @return: the morse code for the character
@@ -83,7 +83,7 @@ const string Morse_Tree::encode(string enc){
 	return encodingMap[enc];
 }
 
-const string Morse_Tree::decode(string dec){
+const string Morse_Tree::decode(const string& dec){
 	/*decode: turns morse code into a letter
 	* @param: the morse code to decode
 	* @return: the letter for the morse code

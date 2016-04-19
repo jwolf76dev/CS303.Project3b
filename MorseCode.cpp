@@ -1,7 +1,7 @@
 #include "MorseCode.h"
 #include "Tokenizer.h"
 
-string MorseCode::decode(string dec)
+string MorseCode::decode(const string& dec)
 {
 	/* decode: Decode morse code into letters
 	* @param: the string to decode
@@ -18,7 +18,7 @@ string MorseCode::decode(string dec)
 	return decoded;
 }
 
-string MorseCode::encode(string enc)
+string MorseCode::encode(const string& enc)
 {
 	/* encode: Encode a series of letters into morse code
 	 * @param: the string to encode

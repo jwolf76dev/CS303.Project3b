@@ -27,12 +27,12 @@ public:
 	// Tree Building Functions
 	string trim(const string&);
 	void readFile();
-	void buildTree(string, string);
-	void buildMap(string, string);
+	void buildTree(const string&, const string&);
+	void buildMap(const string&, const string&);
 
 	// Encoding/Decoding Functions
-	const string encode(string); // Return morse code for a letter
-	const string decode(string); // Return letter for a morse code
+	const string encode(const string&); // Return morse code for a letter
+	const string decode(const string&); // Return letter for a morse code
 };
 #endif // !MORSE_TREE_H
 
