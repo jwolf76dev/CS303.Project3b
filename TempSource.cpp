@@ -1,9 +1,12 @@
 #include "Tokenizer.h"
 #include "Morse_Tree.h"
+#include "MorseCode.h"
+#include <iostream>
 void main(void) {
-	Morse_Tree temp;
-
-	string decoded = temp.decode(".---"); // Morse_Tree will decode one letter at a time.  
-
+	MorseCode code;
+	string temp= code.decode("-.- .- - ..  _. . . -.. ...  ... .-.. . . .--."); //kati needs sleep, haven't figured out spaces yet
+	cout << temp << endl;
+	string encode = code.encode("kati");
+	cout << encode << endl;
 	system("pause");
 }

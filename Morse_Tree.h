@@ -3,11 +3,13 @@
 #include <string>
 #include "Tokenizer.h"
 #include "BTNode.h"
+#include <map>
 using namespace std;
 
 class Morse_Tree {
 private:
 	BTNode<string> *root = new BTNode<string>("ROOT");; // A pointer to the root of our tree
+	map<std::string, std::string> encodingMap; // Key = Letter, data = Code
 
 public:
 	Morse_Tree() {

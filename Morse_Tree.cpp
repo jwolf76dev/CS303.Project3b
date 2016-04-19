@@ -43,7 +43,7 @@ void Morse_Tree::buildTree(string letter, string code) {
 	 * @param: the morse code for the node
 	 */
 	BTNode<string> *temp = root, *head = root;
-	for (int i = 0; i < code.length(); i++) { // length of the code is also the tree height
+	for (unsigned int i = 0; i < code.length(); i++) { // length of the code is also the tree height
 		if (code[i] == '.') { // dot, we need to go left
 			if (temp->left == NULL) {
 				temp->left = new BTNode<string>("TEMP"); // Create a dummy node
@@ -51,7 +51,7 @@ void Morse_Tree::buildTree(string letter, string code) {
 			}
 			temp = root = temp->left; // Move the pointers along
 		}
-		else { // dash, we need to go right
+		else { // dash, we need to go right, no need for different dashes, as the file only contains '_'
 			if (temp->right == NULL) {
 				temp->right = new BTNode<string>("TEMP"); // Make a dummy node
 				root->right = temp->right; // Connect the nodes
@@ -60,6 +60,9 @@ void Morse_Tree::buildTree(string letter, string code) {
 		}
 	}
 	temp->data = letter; // Fill the node data with the letter
+
+	encodingMap[letter]=code; // add the entry to the encoding map
+
 	root = head; // Reset the root to the head of the tree
 
 	temp = head = NULL; // Set the temp nodes to NULL before deletion
@@ -72,11 +75,8 @@ string Morse_Tree::encode(string enc){
 	 * @param: the character to encode
 	 * @return: the morse code for the character
 	 */
-	BTNode<string> *head = root;
-	string encoded;
-	// TODO: ALL OF THIS FUNCTION
-
-	return string();
+	// From the technical requirements: You may use a binary search tree or a map to store the codes for letters.
+	return encodingMap[enc];
 }
 
 string Morse_Tree::decode(string dec){
@@ -86,11 +86,16 @@ string Morse_Tree::decode(string dec){
 	*/
 
 	BTNode<string> *temp = root;
-	for (int i = 0; i < dec.length(); i++) {
+	for (unsigned int i = 0; i < dec.length(); i++) {
 		if (dec[i] == '.') // Dot, go left
 			temp = temp->left;
-		else // Dash, go right
+		else if (dec[i] == '_' || dec[i] == '-') // Dash, go right, allows for 2 different "dashes" from user
 			temp = temp->right;
+		else {
+			cout << "ERROR-> Unrecognized character, please only use . - or _ for decoding." << endl;
+			system("pause");
+			exit(1);
+		}
 	}
 	string decoded = temp->data;
 	temp = NULL;
