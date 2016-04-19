@@ -9,6 +9,7 @@ private:
 	Morse_Tree morseCodeTree; // Create our Morse code tree
 public:
 	MorseCode() {}
+	~MorseCode() {}
 
 	string decode(string);
 	string encode(string);

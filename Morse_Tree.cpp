@@ -26,13 +26,14 @@ void Morse_Tree::readFile() {
 		system("pause");
 		exit(1);
 	}
-	string line, letter, code;
+	string line, code;
 	if (in) {
 		while (getline(in, line)) { // Get the line from the file, store it in a variable called line
-			letter = line[0]; // Letter will always be the first character of line
 			Tokenizer token(line.substr(1), "\n"); // Tokenizer class object, ignores character 0,  new line as the delimiter
 			code = trim(token.next_token()); // Code will be from character 1 onwards
-			buildTree(letter, code); // Send letter and code off to be incorporated into the tree
+
+			buildTree(line.substr(0, 1), code); // Send letter and code off to be incorporated into the tree
+			buildMap(line.substr(0,1), code);; // add the entry to the encoding map
 		}
 	}
 }
@@ -42,63 +43,65 @@ void Morse_Tree::buildTree(string letter, string code) {
 	 * @param: the data for the node
 	 * @param: the morse code for the node
 	 */
-	BTNode<string> *temp = root, *head = root;
+	currentNode = root; // Reset the current node to the root of the tree
+
 	for (unsigned int i = 0; i < code.length(); i++) { // length of the code is also the tree height
 		if (code[i] == '.') { // dot, we need to go left
-			if (temp->left == NULL) {
-				temp->left = new BTNode<string>("TEMP"); // Create a dummy node
-				root->left = temp->left; // Connect the nodes
+			if (currentNode->left == NULL) {
+				currentNode->left = new BTNode<string>("TEMP"); // Create a dummy node
 			}
-			temp = root = temp->left; // Move the pointers along
+			currentNode = currentNode->left; // Move the pointers along
 		}
 		else { // dash, we need to go right, no need for different dashes, as the file only contains '_'
-			if (temp->right == NULL) {
-				temp->right = new BTNode<string>("TEMP"); // Make a dummy node
-				root->right = temp->right; // Connect the nodes
+			if (currentNode->right == NULL) {
+				currentNode->right = new BTNode<string>("TEMP"); // Make a dummy node
 			}
-			temp = root = temp->right; // Move the pointers along
+			currentNode = currentNode->right; // Move the pointers along
 		}
 	}
-	temp->data = letter; // Fill the node data with the letter
+	currentNode->data = letter; // Fill the node data with the letter
 
-	encodingMap[letter]=code; // add the entry to the encoding map
-
-	root = head; // Reset the root to the head of the tree
-
-	temp = head = NULL; // Set the temp nodes to NULL before deletion
-	delete temp;
-	delete head;
 }
 
-string Morse_Tree::encode(string enc){
+void Morse_Tree::buildMap(string letter, string code){
+	/* buildMap: Build the map for encoding
+	* @param: the key
+	* @param: the morse code which corresponds that key
+	*/
+
+	encodingMap[letter] = code; // add the entry to the encoding map
+}
+
+const string Morse_Tree::encode(string enc){
 	/*encode: turns a character into morse code
 	 * @param: the character to encode
 	 * @return: the morse code for the character
 	 */
 	// From the technical requirements: You may use a binary search tree or a map to store the codes for letters.
+	//TODO: ERROR checking
+
 	return encodingMap[enc];
 }
 
-string Morse_Tree::decode(string dec){
+const string Morse_Tree::decode(string dec){
 	/*decode: turns morse code into a letter
 	* @param: the morse code to decode
 	* @return: the letter for the morse code
 	*/
 
-	BTNode<string> *temp = root;
+	currentNode = root; // Reset the current node to the root of the tree
+
 	for (unsigned int i = 0; i < dec.length(); i++) {
 		if (dec[i] == '.') // Dot, go left
-			temp = temp->left;
+			currentNode = currentNode->left;
 		else if (dec[i] == '_' || dec[i] == '-') // Dash, go right, allows for 2 different "dashes" from user
-			temp = temp->right;
+			currentNode = currentNode->right;
 		else {
 			cout << "ERROR-> Unrecognized character, please only use . - or _ for decoding." << endl;
 			system("pause");
 			exit(1);
 		}
 	}
-	string decoded = temp->data;
-	temp = NULL;
-	delete temp; // remove temp pointer
-	return decoded;
+	
+	return currentNode->data;
 }

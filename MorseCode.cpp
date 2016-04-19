@@ -32,8 +32,7 @@ string MorseCode::encode(string enc)
 		for (unsigned int i = 0; i < temp.length(); i++) {
 			encoded += morseCodeTree.encode(temp.substr(i, 1)); // Send characters serially to Morse_Tree
 			encoded += ' '; //Space between letters
-		}
-		
+		}	
 	}
 
 	return encoded;
