@@ -1,3 +1,6 @@
+/* CS303 - Project 3b - Morse Code Tree
+*/
+
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
 #include<string>

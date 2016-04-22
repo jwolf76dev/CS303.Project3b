@@ -1,3 +1,7 @@
+/* CS303 - Project 3b - Morse Code Tree
+* (c) Binh Mai, Kati Williams, Jay Wolf
+*/
+
 #include "Morse_Tree.h"
 #include <fstream>
 #include <iostream>
@@ -36,6 +40,7 @@ void Morse_Tree::readFile() {
 			buildMap(line.substr(0,1), code);; // add the entry to the encoding map
 		}
 	}
+	return;
 }
 
 void Morse_Tree::buildTree(const string& letter, const string& code) {
@@ -43,6 +48,7 @@ void Morse_Tree::buildTree(const string& letter, const string& code) {
 	 * @param: the data for the node
 	 * @param: the morse code for the node
 	 */
+
 	currentNode = root; // Reset the current node to the root of the tree
 
 	for (unsigned int i = 0; i < code.length(); i++) { // length of the code is also the tree height
@@ -61,6 +67,7 @@ void Morse_Tree::buildTree(const string& letter, const string& code) {
 	}
 	currentNode->data = letter; // Fill the node data with the letter
 
+	return;
 }
 
 void Morse_Tree::buildMap(const string& letter, const string& code){
@@ -77,9 +84,11 @@ const string Morse_Tree::encode(const string& enc){
 	 * @param: the character to encode
 	 * @return: the morse code for the character
 	 */
-	// From the technical requirements: You may use a binary search tree or a map to store the codes for letters.
-	//TODO: ERROR checking
 
+	if (!isalpha(enc[0])) {
+		cout << "ERROR-> Cannot encode expression, non-alpha character found." << endl;
+		error();
+	}
 	return encodingMap[enc];
 }
 
@@ -97,11 +106,18 @@ const string Morse_Tree::decode(const string& dec){
 		else if (dec[i] == '_' || dec[i] == '-') // Dash, go right, allows for 2 different "dashes" from user
 			currentNode = currentNode->right;
 		else {
-			cout << "ERROR-> Unrecognized character, please only use . - or _ for decoding." << endl;
-			system("pause");
-			exit(1);
+			cout << "ERROR-> Cannot decode expression, please only use . - or _ for decoding." << endl;
+			error();
 		}
 	}
 	
 	return currentNode->data;
+}
+
+void Morse_Tree::error() {
+	/*error: pause system so user can read error
+	*/
+
+	system("PAUSE");
+	exit(1);
 }

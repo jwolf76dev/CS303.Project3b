@@ -1,3 +1,6 @@
+/* CS303 - Project 3b - Morse Code Tree
+*/
+
 #include "Tokenizer.h"
 using std::string;
 

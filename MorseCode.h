@@ -1,3 +1,7 @@
+/* CS303 - Project 3b - Morse Code Tree
+* (c) Binh Mai, Kati Williams, Jay Wolf
+*/
+
 #ifndef MORSE_CODE_H
 #define MORSE_CODE_H
 
@@ -12,9 +16,7 @@ public:
 	~MorseCode() {}
 
 	string decode(const string&);
-	string encode(const string&);
-
-
+	string encode(const string);
 };
 #endif // !MORSE_CODE_H
 

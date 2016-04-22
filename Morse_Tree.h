@@ -1,3 +1,7 @@
+/* CS303 - Project 3b - Morse Code Tree
+* (c) Binh Mai, Kati Williams, Jay Wolf
+*/
+
 #ifndef MORSE_TREE_H
 #define MORSE_TREE_H
 
@@ -15,8 +19,8 @@ private:
 
 public:
 	Morse_Tree() {
-		readFile();
-	} // Build the tree when object is created
+		readFile(); // Build the tree when object is created
+	}
 
 	~Morse_Tree() { // Destructor, delete our pointers
 		root = currentNode = NULL;
@@ -33,6 +37,8 @@ public:
 	// Encoding/Decoding Functions
 	const string encode(const string&); // Return morse code for a letter
 	const string decode(const string&); // Return letter for a morse code
+
+	void error(); // Printing errors
 };
 #endif // !MORSE_TREE_H
 
