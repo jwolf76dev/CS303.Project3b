@@ -12,9 +12,16 @@ string Morse_Tree::trim(const string& the_string)
    * @return: the trimmed string
    */
 
+    // Find the first non-space character
 	size_t p = the_string.find_first_not_of(" ");
+    
+    // If empty string, return a blank string
 	if (p == string::npos) return "";
+    
+    // Find the last non-space character
 	size_t q = the_string.find_last_not_of(" ");
+    
+    // Return the string of characters between the first and last space
 	return the_string.substr(p, q - p + 1);
 }
 
@@ -24,20 +31,32 @@ void Morse_Tree::readFile() {
 	 * @return: none
 	 */
 
+    // Read in file
 	ifstream in("morse.txt");
+    
+    // Throw an error if file is not in correct location
 	if (!in) {
 		cout << "Error, check morse.txt file location" << endl;
 		system("pause");
 		exit(1);
 	}
 	string line, code;
+    
 	if (in) {
-		while (getline(in, line)) { // Get the line from the file, store it in a variable called line
-			Tokenizer token(line.substr(1), "\n"); // Tokenizer class object, ignores character 0,  new line as the delimiter
-			code = trim(token.next_token()); // Code will be from character 1 onwards
+        // Get the line from the file, store it in a variable called line
+		while (getline(in, line)) {
+            
+            // Tokenizer class object, ignores character 0,  new line as the delimiter
+			Tokenizer token(line.substr(1), "\n");
+            
+            // Code will be from character 1 onwards
+            code = trim(token.next_token());
 
-			buildTree(line.substr(0, 1), code); // Send letter and code off to be incorporated into the tree
-			buildMap(line.substr(0,1), code);; // add the entry to the encoding map
+            // Send letter and code off to be incorporated into the tree
+			buildTree(line.substr(0, 1), code);
+            
+            // Add the entry to the encoding map
+			buildMap(line.substr(0,1), code);;
 		}
 	}
 	return;
@@ -72,19 +91,21 @@ void Morse_Tree::buildTree(const string& letter, const string& code) {
 
 void Morse_Tree::buildMap(const string& letter, const string& code){
 	/* buildMap: Build the map for encoding
-	* @param: the key
-	* @param: the morse code which corresponds that key
-	*/
+	 * @param: the key
+	 * @param: the morse code which corresponds that key
+	 */
 
-	encodingMap[letter] = code; // add the entry to the encoding map
+    // Add the entry to the encoding map
+	encodingMap[letter] = code;
 }
 
 const string Morse_Tree::encode(const string& enc){
-	/*encode: turns a character into morse code
+	/* encode: turns a character into morse code
 	 * @param: the character to encode
 	 * @return: the morse code for the character
 	 */
 
+    // Throws an error if character is not alphabetic
 	if (!isalpha(enc[0])) {
 		cout << "ERROR-> Cannot encode expression, non-alpha character found." << endl;
 		error();
@@ -93,12 +114,13 @@ const string Morse_Tree::encode(const string& enc){
 }
 
 const string Morse_Tree::decode(const string& dec){
-	/*decode: turns morse code into a letter
-	* @param: the morse code to decode
-	* @return: the letter for the morse code
-	*/
+	/* decode: turns morse code into a letter
+     * @param: the morse code to decode
+	 * @return: the letter for the morse code
+	 */
 
-	currentNode = root; // Reset the current node to the root of the tree
+    // Reset the current node to the root of the tree
+	currentNode = root;
 
 	for (unsigned int i = 0; i < dec.length(); i++) {
 		if (dec[i] == '.') // Dot, go left
@@ -115,8 +137,8 @@ const string Morse_Tree::decode(const string& dec){
 }
 
 void Morse_Tree::error() {
-	/*error: pause system so user can read error
-	*/
+	/* error: pause system so user can read error
+	 */
 
 	system("PAUSE");
 	exit(1);

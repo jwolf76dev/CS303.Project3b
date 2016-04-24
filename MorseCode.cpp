@@ -8,12 +8,13 @@
 string MorseCode::decode(const string& dec)
 {
 	/* decode: Decode morse code into letters
-	* @param: the string to decode
-	* @return: the decoded string
-	*/
+	 * @param: the string to decode
+	 * @return: the decoded string
+	 */
 
 	string decoded;
-	Tokenizer token(dec); // We need to tokenize the string, default delimitor is space
+    // Tokenize the given string, and the default delimitor is space
+	Tokenizer token(dec);
 
 	while (token.has_more_tokens()) {
 		decoded += morseCodeTree.decode(token.next_token());
@@ -30,11 +31,16 @@ string MorseCode::encode( const string enc)
 	 */
 
 	string encoded,singleLetter;
-
-	for (unsigned int i = 0; i < enc.length(); i++) { // for each letter in the word
+    
+    // For each letter in the word
+	for (unsigned int i = 0; i < enc.length(); i++) {
 		singleLetter = tolower(enc[i]);
-		encoded += morseCodeTree.encode(singleLetter); // Send characters serially to Morse_Tree; LETTER
-		encoded += ' '; //Space between letters in the word of morse code
+    
+        // Send characters serially to Morse_Tree (one letter at a time)
+		encoded += morseCodeTree.encode(singleLetter);
+        
+        //Space between letters in the word of morse code
+		encoded += ' ';
 	}
 
 	return encoded;

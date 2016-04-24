@@ -20,7 +20,7 @@ struct BTNode
 	// Destructor (to avoid warning message)
 	virtual ~BTNode() {}
 
-	// to_string
+	// Function to convert BTNode to string for output
 	virtual std::string to_string() const {
 		std::ostringstream os;
 		os << data;

@@ -19,10 +19,12 @@ private:
 
 public:
 	Morse_Tree() {
-		readFile(); // Build the tree when object is created
+        // Build the tree when object is created
+		readFile();
 	}
 
-	~Morse_Tree() { // Destructor, delete our pointers
+    // Destructor, deletes our pointers
+	~Morse_Tree() {
 		root = currentNode = NULL;
 		delete root;
 		delete currentNode;

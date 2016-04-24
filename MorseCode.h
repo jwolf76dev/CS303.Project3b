@@ -10,12 +10,17 @@ using namespace std;
 
 class MorseCode {
 private:
-	Morse_Tree morseCodeTree; // Create our Morse code tree
+    // Creates the Morse code tree
+	Morse_Tree morseCodeTree;
+    
 public:
 	MorseCode() {}
 	~MorseCode() {}
-
+    
+    // Function that turns characters into morse code
 	string decode(const string&);
+    
+    // Function that converts morse code into characters
 	string encode(const string);
 };
 #endif // !MORSE_CODE_H
