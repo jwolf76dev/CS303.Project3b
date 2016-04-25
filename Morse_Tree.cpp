@@ -71,7 +71,7 @@ void Morse_Tree::buildTree(const string& letter, const string& code) {
 	currentNode = root; // Reset the current node to the root of the tree
 
 	for (unsigned int i = 0; i < code.length(); i++) { // length of the code is also the tree height
-		if (code[i] == '.') { // dot, we need to go left
+		if (dot.find(code[i])) { // dot, we need to go left
 			if (currentNode->left == NULL) {
 				currentNode->left = new BTNode<string>("TEMP"); // Create a dummy node
 			}
@@ -123,12 +123,17 @@ const string Morse_Tree::decode(const string& dec){
 	currentNode = root;
 
 	for (unsigned int i = 0; i < dec.length(); i++) {
-		if (dec[i] == '.') // Dot, go left
+		if (dot.find(dec[i])) // Dot, go left
 			currentNode = currentNode->left;
-		else if (dec[i] == '_' || dec[i] == '-') // Dash, go right, allows for 2 different "dashes" from user
+		else if (dash.find(dec[i])) // Dash, go right, allows for 2 different "dashes" from user
 			currentNode = currentNode->right;
 		else {
 			cout << "ERROR-> Cannot decode expression, please only use . - or _ for decoding." << endl;
+			error();
+		}
+		if (currentNode == NULL) {
+			// The code entered is either too long, or not a known code (e.g. ..-- or .....)
+			cout << "ERROR-> Code entered is not a known alphabet morse code." << endl;
 			error();
 		}
 	}

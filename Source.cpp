@@ -7,7 +7,7 @@
 
 void main(void) {
 	MorseCode code;
-	string temp= code.decode("_._ ._ _ ..    _. . . _.. ...    ... ._.. . . .__.");
+	string temp= code.decode(".._");
 	cout << temp << endl;
 
 	string encode = code.encode("KATI");

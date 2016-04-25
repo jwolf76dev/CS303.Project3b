@@ -16,7 +16,8 @@ private:
 	BTNode<string> *currentNode = new BTNode<string>("ROOT");; // A pointer to the root of our tree
 	BTNode<string> *root = currentNode;
 	map<string, string> encodingMap; // Key = Letter, data = Code
-
+	const string dot = ".";
+	const string dash = "-_~";
 public:
 	Morse_Tree() {
         // Build the tree when object is created
