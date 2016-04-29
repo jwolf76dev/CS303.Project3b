@@ -13,40 +13,25 @@ public:
 
 	// Public Member Functions
 	virtual bool insert(const Item_Type& item);
-
 	virtual bool erase(const Item_Type& item);
-
 	const Item_Type* min() const;
-
 	const Item_Type* min(BTNode<Item_Type>* local_root) const;
-
 	const Item_Type* max() const;
-
 	const Item_Type* max(BTNode<Item_Type>* local_root) const;
-
 	const Item_Type* find(const Item_Type& target) const;
+
 private:
-
 	// Private Member Functions
-	virtual bool insert(BTNode<Item_Type>*& local_root,
-		const Item_Type& item);
-
-	virtual bool erase(BTNode<Item_Type>*& local_root,
-		const Item_Type& item);
-
-	const Item_Type* find(BTNode<Item_Type>* local_root,
-		const Item_Type& target) const;
-
-	virtual void replace_parent(
-		BTNode<Item_Type>*& old_root,
-		BTNode<Item_Type>*& local_root);
+	virtual bool insert(BTNode<Item_Type>*& local_root, const Item_Type& item);
+	virtual bool erase(BTNode<Item_Type>*& local_root, const Item_Type& item);
+	const Item_Type* find(BTNode<Item_Type>* local_root, const Item_Type& target) const;
+	virtual void replace_parent(BTNode<Item_Type>*& old_root, BTNode<Item_Type>*& local_root);
 
 }; // End binary search tree
 
 template<typename Item_Type>
 const Item_Type* Binary_Search_Tree<Item_Type>::min() const {
 	return min(this->root);
-		
 }
 
 template<typename Item_Type>
@@ -62,11 +47,10 @@ const Item_Type* Binary_Search_Tree<Item_Type>::min(BTNode<Item_Type>* local_roo
 template<typename Item_Type>
 const Item_Type* Binary_Search_Tree<Item_Type>::max() const {
 	return max(this->root);
-
 }
 
 template<typename Item_Type>
-const Item_Type* Binary_Search_Tree<Item_Type>::max(BTNode<Item_Type>* local_root) const{
+const Item_Type* Binary_Search_Tree<Item_Type>::max(BTNode<Item_Type>* local_root) const {
 	if (local_root == NULL)
 		return NULL;
 
@@ -75,24 +59,21 @@ const Item_Type* Binary_Search_Tree<Item_Type>::max(BTNode<Item_Type>* local_roo
 		return max(local_root->right);
 }
 
-
-
 template<typename Item_Type>
-const Item_Type* Binary_Search_Tree<Item_Type>::find(
-	const Item_Type& item) const {
-		return find(this->root, item);
+const Item_Type* Binary_Search_Tree<Item_Type>::find(const Item_Type& item) const {
+	return find(this->root, item);
 }
 
 template<typename Item_Type>
 const Item_Type* Binary_Search_Tree<Item_Type>::find(BTNode<Item_Type>* local_root, const Item_Type& target) const {
-		if (local_root == NULL)
-			return NULL;
-		if (target < local_root->data)
-			return find(local_root->left, target);
-		else if (local_root->data < target)
-			return find(local_root->right, target);
-		else
-			return &(local_root->data);
+	if (local_root == NULL)
+		return NULL;
+	if (target < local_root->data)
+		return find(local_root->left, target);
+	else if (local_root->data < target)
+		return find(local_root->right, target);
+	else
+		return &(local_root->data);
 }
 
 template<typename Item_Type>
@@ -102,20 +83,19 @@ bool Binary_Search_Tree<Item_Type>::insert(const Item_Type& item) {
 
 template<typename Item_Type>
 bool Binary_Search_Tree<Item_Type>::insert(BTNode<Item_Type>*& local_root,const Item_Type& item) {
-		if (local_root == NULL) {
-			local_root = new BTNode<Item_Type>(item);
-			return true;
-		}
-		else {
-			if (item < local_root->data)
-				return insert(local_root->left, item);
-			else if (local_root->data < item)
-				return insert(local_root->right, item);
-			else
-				return false;
-		}
+	if (local_root == NULL) {
+		local_root = new BTNode<Item_Type>(item);
+		return true;
+	}
+	else {
+		if (item < local_root->data)
+			return insert(local_root->left, item);
+		else if (local_root->data < item)
+			return insert(local_root->right, item);
+		else
+			return false;
+	}
 }
-
 
 template<typename Item_Type>
 bool Binary_Search_Tree<Item_Type>::erase(const Item_Type& item) {
@@ -151,16 +131,14 @@ bool Binary_Search_Tree<Item_Type>::erase(BTNode<Item_Type>*& local_root, const 
 
 template<typename Item_Type>
 void Binary_Search_Tree<Item_Type>::replace_parent(BTNode<Item_Type>*& old_root, BTNode<Item_Type>*& local_root) {
-		if (local_root->right != NULL) {
-			replace_parent(old_root, local_root->right);
-		}
-		else {
-			old_root->data = local_root->data;
-			old_root = local_root;
-			local_root = local_root->left;
-		}
+	if (local_root->right != NULL) {
+		replace_parent(old_root, local_root->right);
+	}
+	else {
+		old_root->data = local_root->data;
+		old_root = local_root;
+		local_root = local_root->left;
+	}
 }
-
-
 
 #endif

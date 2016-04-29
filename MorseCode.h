@@ -68,6 +68,4 @@ string MorseCode<Item_Type>::encode(const string enc)
 	return encoded;
 }
 
-
 #endif // !MORSE_CODE_H
-

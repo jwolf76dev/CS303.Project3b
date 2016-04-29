@@ -7,11 +7,11 @@
 
 void main(void) {
 	MorseCode<string> code;
-	string temp= code.decode(".._");
-	cout << temp << endl;
+	string temp= code.decode("_... .. _. ....");
+	cout << "decode: " << temp << endl;
 
 	string encode = code.encode("KATI");
-	cout << "kati in morse code: " <<  encode << endl;
+	cout << "encode: " <<  encode << endl << endl;
 	system("pause");
 
 	return;
