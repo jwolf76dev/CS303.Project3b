@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 
+template<typename Item_Type>
 string Morse_Tree::trim(const string& the_string)
 { /* trim: trims off excess characters from a string
    * @param: the string to trim
@@ -25,6 +26,7 @@ string Morse_Tree::trim(const string& the_string)
 	return the_string.substr(p, q - p + 1);
 }
 
+template<typename Item_Type>
 void Morse_Tree::readFile() {
 	/* readFile: reads in morse code file then sends it off to build the tree
 	 * @param: none
@@ -62,6 +64,7 @@ void Morse_Tree::readFile() {
 	return;
 }
 
+template<typename Item_Type>
 void Morse_Tree::buildTree(const string& letter, const string& code) {
 	/* buildTree: Build the tree one node at a time
 	 * @param: the data for the node
@@ -89,6 +92,7 @@ void Morse_Tree::buildTree(const string& letter, const string& code) {
 	return;
 }
 
+template<typename Item_Type>
 void Morse_Tree::buildMap(const string& letter, const string& code){
 	/* buildMap: Build the map for encoding
 	 * @param: the key
@@ -99,6 +103,7 @@ void Morse_Tree::buildMap(const string& letter, const string& code){
 	encodingMap[letter] = code;
 }
 
+template<typename Item_Type>
 const string Morse_Tree::encode(const string& enc){
 	/* encode: turns a character into morse code
 	 * @param: the character to encode
@@ -113,6 +118,7 @@ const string Morse_Tree::encode(const string& enc){
 	return encodingMap[enc];
 }
 
+template<typename Item_Type>
 const string Morse_Tree::decode(const string& dec){
 	/* decode: turns morse code into a letter
      * @param: the morse code to decode
@@ -141,6 +147,7 @@ const string Morse_Tree::decode(const string& dec){
 	return currentNode->data;
 }
 
+template<typename Item_Type>
 void Morse_Tree::error() {
 	/* error: pause system so user can read error
 	 */

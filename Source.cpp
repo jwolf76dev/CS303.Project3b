@@ -6,7 +6,7 @@
 #include <iostream>
 
 void main(void) {
-	MorseCode code;
+	MorseCode<string> code;
 	string temp= code.decode(".._");
 	cout << temp << endl;
 

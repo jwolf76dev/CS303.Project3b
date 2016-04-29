@@ -5,6 +5,7 @@
 #include "MorseCode.h"
 #include "Tokenizer.h"
 
+template<typename Item_Type>
 string MorseCode::decode(const string& dec)
 {
 	/* decode: Decode morse code into letters
@@ -23,6 +24,7 @@ string MorseCode::decode(const string& dec)
 	return decoded;
 }
 
+template<typename Item_Type>
 string MorseCode::encode( const string enc)
 {
 	/* encode: Encode a series of letters into morse code
