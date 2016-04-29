@@ -7,11 +7,11 @@
 #include <iostream>
 
 template<typename Item_Type>
-string Morse_Tree::trim(const string& the_string)
-{ /* trim: trims off excess characters from a string
-   * @param: the string to trim
-   * @return: the trimmed string
-   */
+string Morse_Tree::trim(const string& the_string) {
+    /* trim: trims off excess characters from a string
+     * @param: the string to trim
+     * @return: the trimmed string
+     */
 
     // Find the first non-space character
 	size_t p = the_string.find_first_not_of(" ");

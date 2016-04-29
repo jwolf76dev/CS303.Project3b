@@ -12,8 +12,7 @@
 #include <vector>
 
 template<typename Item_Type>
-class Binary_Tree
-{
+class Binary_Tree {
 public:
 
 	void setRoot(BTNode<Item_Type>* newRoot);

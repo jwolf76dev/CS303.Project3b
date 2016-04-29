@@ -5,8 +5,7 @@
 
 
 template<typename Item_Type>
-class Binary_Search_Tree : public Binary_Tree<Item_Type>
-{
+class Binary_Search_Tree : public Binary_Tree<Item_Type> {
 public:
 	// Constructor
 	Binary_Search_Tree() : Binary_Tree<Item_Type>() {}
